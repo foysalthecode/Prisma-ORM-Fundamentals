@@ -64,23 +64,38 @@ async function run() {
   //   });
   //   console.log(updateUser);
   //* delete --------------------------------------------------------------
-  const deleteUser = await prisma.user.delete({
-    where: {
-      id: 2,
-    },
-  });
-  console.log(deleteUser);
-  //* get user data by id -----------------------------------------------------------
-  //   const getUserDataById = await prisma.user.findUnique({
+  //   const deleteUser = await prisma.user.delete({
   //     where: {
-  //       id: 1,
-  //     },
-  //     include: {
-  //       posts: true,
-  //       profiles: true,
+  //       id: 2,
   //     },
   //   });
-  //   console.log(getUserDataById);
+  //   console.log(deleteUser);
+  //* get user data by id -------------------------------------------------
+  // const getUserDataById = await prisma.user.findUnique({
+  //   where: {
+  //     id: 1,
+  //   },
+  //   include: {
+  //     posts: true,
+  //     profiles: true,
+  //   },
+  // });
+  // console.log(getUserDataById);
+  //* upsert ---------------------------------------------------------------
+  const upsertUser = await prisma.user.upsert({
+    where: {
+      email: "foysal@gmail.com",
+    },
+    update: {
+      name: "Foysal Ahmed 1",
+    },
+    create: {
+      name: "Foysal Ahmed 2",
+      email: "foysal@gmail.com",
+    },
+  });
+
+  console.log(upsertUser);
 }
 
 run();
