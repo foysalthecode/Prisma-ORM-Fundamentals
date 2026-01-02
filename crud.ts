@@ -37,7 +37,16 @@ async function run() {
 
   //* Find all user  -----------------------------------------------------------
   const users = await prisma.user.findMany({
-    include: {
+    // include: {           // include diye main data er sathe included data gula add hoye jay
+    //   posts: true,
+    //   profiles: true,
+    // },
+
+    select: {
+      // select diye only selected item gula e dekha jay
+      id: true,
+      name: true,
+      email: true,
       posts: true,
       profiles: true,
     },
