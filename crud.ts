@@ -63,29 +63,24 @@ async function run() {
   //     },
   //   });
   //   console.log(updateUser);
-
   //* delete --------------------------------------------------------------
-
-  //   const deleteUser = await prisma.user.delete({
+  const deleteUser = await prisma.user.delete({
+    where: {
+      id: 2,
+    },
+  });
+  console.log(deleteUser);
+  //* get user data by id -----------------------------------------------------------
+  //   const getUserDataById = await prisma.user.findUnique({
   //     where: {
   //       id: 1,
   //     },
+  //     include: {
+  //       posts: true,
+  //       profiles: true,
+  //     },
   //   });
-
-  //   console.log(deleteUser);
-
-  //* get user data by id -----------------------------------------------------------
-  const getUserDataById = await prisma.user.findUnique({
-    where: {
-      id: 1,
-    },
-    include: {
-      posts: true,
-      profiles: true,
-    },
-  });
-
-  console.log(getUserDataById);
+  //   console.log(getUserDataById);
 }
 
 run();
