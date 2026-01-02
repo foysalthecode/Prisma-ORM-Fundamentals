@@ -43,28 +43,49 @@ async function run() {
   //   });
   //   console.dir(users, { depth: Infinity });
   //* Update user -----------------------------------------------------------
+  //   const updateUser = await prisma.profile.update({
+  //     where: {
+  //       userId: 1,
+  //     },
+  //     data: {
+  //       bio: "Web Developer and Student",
+  //       dateOfBirth: "2005-06-13T10:50:07.368Z",
+  //     },
+  //     select: {
+  //       id: true,
+  //       bio: true,
+  //       user: {
+  //         select: {
+  //           name: true,
+  //           email: true,
+  //         },
+  //       },
+  //     },
+  //   });
+  //   console.log(updateUser);
 
-  const updateUser = await prisma.profile.update({
+  //* delete --------------------------------------------------------------
+
+  //   const deleteUser = await prisma.user.delete({
+  //     where: {
+  //       id: 1,
+  //     },
+  //   });
+
+  //   console.log(deleteUser);
+
+  //* get user data by id -----------------------------------------------------------
+  const getUserDataById = await prisma.user.findUnique({
     where: {
-      userId: 1,
+      id: 1,
     },
-    data: {
-      bio: "Web Developer and Student",
-      dateOfBirth: "2005-06-13T10:50:07.368Z",
-    },
-    select: {
-      id: true,
-      bio: true,
-      user: {
-        select: {
-          name: true,
-          email: true,
-        },
-      },
+    include: {
+      posts: true,
+      profiles: true,
     },
   });
 
-  console.log(updateUser);
+  console.log(getUserDataById);
 }
 
 run();
